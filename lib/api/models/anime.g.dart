@@ -6,31 +6,43 @@ part of 'anime.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+AnimeDtoData _$AnimeDtoDataFromJson(Map<String, dynamic> json) => AnimeDtoData(
+      data: (json['data'] as List<dynamic>)
+          .map((e) => AnimeDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$AnimeDtoDataToJson(AnimeDtoData instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
 AnimeDto _$AnimeDtoFromJson(Map<String, dynamic> json) => AnimeDto(
       id: (json['id'] as num).toInt(),
-      type: AnimeType.fromJson(json['type'] as Map<String, dynamic>),
+      type: AnimeDtoType.fromJson(json['type'] as Map<String, dynamic>),
       year: (json['year'] as num).toInt(),
-      name: AnimeName.fromJson(json['name'] as Map<String, dynamic>),
+      name: AnimeDtoName.fromJson(json['name'] as Map<String, dynamic>),
       alias: json['alias'] as String,
-      season: AnimeSeason.fromJson(json['season'] as Map<String, dynamic>),
-      poster: AnimePoster.fromJson(json['poster'] as Map<String, dynamic>),
+      season: AnimeDtoSeason.fromJson(json['season'] as Map<String, dynamic>),
+      poster: AnimeDtoPoster.fromJson(json['poster'] as Map<String, dynamic>),
       freshAt: json['fresh_at'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       isOngoing: json['is_ongoing'] as bool,
-      ageRating: AgeRating.fromJson(json['age_rating'] as Map<String, dynamic>),
-      publishDay:
-          PublishDay.fromJson(json['publish_day'] as Map<String, dynamic>),
-      description: json['description'] as String,
+      ageRating: AnimeDtoAgeRating.fromJson(
+          json['age_rating'] as Map<String, dynamic>),
+      publishDay: AnimeDtoPublishDay.fromJson(
+          json['publish_day'] as Map<String, dynamic>),
+      description: json['description'] as String?,
       notification: json['notification'] as String?,
-      episodesTotal: (json['episodes_total'] as num).toInt(),
+      episodesTotal: (json['episodes_total'] as num?)?.toInt(),
       externalPlayer: json['external_player'] as String?,
       isInProduction: json['is_in_production'] as bool,
       isBlockedByGeo: json['is_blocked_by_geo'] as bool,
       isBlockedByCopyrights: json['is_blocked_by_copyrights'] as bool,
       addedInUsersFavorites: (json['added_in_users_favorites'] as num).toInt(),
       averageDurationOfEpisode:
-          (json['average_duration_of_episode'] as num).toInt(),
+          (json['average_duration_of_episode'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$AnimeDtoToJson(AnimeDto instance) => <String, dynamic>{
@@ -58,85 +70,94 @@ Map<String, dynamic> _$AnimeDtoToJson(AnimeDto instance) => <String, dynamic>{
       'average_duration_of_episode': instance.averageDurationOfEpisode,
     };
 
-AnimeType _$AnimeTypeFromJson(Map<String, dynamic> json) => AnimeType(
-      value: json['value'] as String,
-      description: json['description'] as String,
+AnimeDtoType _$AnimeDtoTypeFromJson(Map<String, dynamic> json) => AnimeDtoType(
+      value: json['value'] as String?,
+      description: json['description'] as String?,
     );
 
-Map<String, dynamic> _$AnimeTypeToJson(AnimeType instance) => <String, dynamic>{
-      'value': instance.value,
-      'description': instance.description,
-    };
-
-AnimeName _$AnimeNameFromJson(Map<String, dynamic> json) => AnimeName(
-      main: json['main'] as String,
-      english: json['english'] as String,
-      alternative: json['alternative'] as String,
-    );
-
-Map<String, dynamic> _$AnimeNameToJson(AnimeName instance) => <String, dynamic>{
-      'main': instance.main,
-      'english': instance.english,
-      'alternative': instance.alternative,
-    };
-
-AnimeSeason _$AnimeSeasonFromJson(Map<String, dynamic> json) => AnimeSeason(
-      value: json['value'] as String,
-      description: json['description'] as String,
-    );
-
-Map<String, dynamic> _$AnimeSeasonToJson(AnimeSeason instance) =>
+Map<String, dynamic> _$AnimeDtoTypeToJson(AnimeDtoType instance) =>
     <String, dynamic>{
       'value': instance.value,
       'description': instance.description,
     };
 
-AnimePoster _$AnimePosterFromJson(Map<String, dynamic> json) => AnimePoster(
-      src: json['src'] as String,
-      thumbnail: json['thumbnail'] as String,
-      optimized:
-          OptimizedPoster.fromJson(json['optimized'] as Map<String, dynamic>),
+AnimeDtoName _$AnimeDtoNameFromJson(Map<String, dynamic> json) => AnimeDtoName(
+      main: json['main'] as String,
+      english: json['english'] as String,
+      alternative: json['alternative'] as String?,
     );
 
-Map<String, dynamic> _$AnimePosterToJson(AnimePoster instance) =>
+Map<String, dynamic> _$AnimeDtoNameToJson(AnimeDtoName instance) =>
+    <String, dynamic>{
+      'main': instance.main,
+      'english': instance.english,
+      'alternative': instance.alternative,
+    };
+
+AnimeDtoSeason _$AnimeDtoSeasonFromJson(Map<String, dynamic> json) =>
+    AnimeDtoSeason(
+      value: json['value'] as String,
+      description: json['description'] as String,
+    );
+
+Map<String, dynamic> _$AnimeDtoSeasonToJson(AnimeDtoSeason instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'description': instance.description,
+    };
+
+AnimeDtoPoster _$AnimeDtoPosterFromJson(Map<String, dynamic> json) =>
+    AnimeDtoPoster(
+      src: json['src'] as String,
+      thumbnail: json['thumbnail'] as String,
+      optimized: AnimeDtoOptimizedPoster.fromJson(
+          json['optimized'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AnimeDtoPosterToJson(AnimeDtoPoster instance) =>
     <String, dynamic>{
       'src': instance.src,
       'thumbnail': instance.thumbnail,
       'optimized': instance.optimized,
     };
 
-OptimizedPoster _$OptimizedPosterFromJson(Map<String, dynamic> json) =>
-    OptimizedPoster(
+AnimeDtoOptimizedPoster _$AnimeDtoOptimizedPosterFromJson(
+        Map<String, dynamic> json) =>
+    AnimeDtoOptimizedPoster(
       src: json['src'] as String,
       thumbnail: json['thumbnail'] as String,
     );
 
-Map<String, dynamic> _$OptimizedPosterToJson(OptimizedPoster instance) =>
+Map<String, dynamic> _$AnimeDtoOptimizedPosterToJson(
+        AnimeDtoOptimizedPoster instance) =>
     <String, dynamic>{
       'src': instance.src,
       'thumbnail': instance.thumbnail,
     };
 
-AgeRating _$AgeRatingFromJson(Map<String, dynamic> json) => AgeRating(
+AnimeDtoAgeRating _$AnimeDtoAgeRatingFromJson(Map<String, dynamic> json) =>
+    AnimeDtoAgeRating(
       value: json['value'] as String,
       label: json['label'] as String,
       isAdult: json['is_adult'] as bool,
       description: json['description'] as String,
     );
 
-Map<String, dynamic> _$AgeRatingToJson(AgeRating instance) => <String, dynamic>{
+Map<String, dynamic> _$AnimeDtoAgeRatingToJson(AnimeDtoAgeRating instance) =>
+    <String, dynamic>{
       'value': instance.value,
       'label': instance.label,
       'is_adult': instance.isAdult,
       'description': instance.description,
     };
 
-PublishDay _$PublishDayFromJson(Map<String, dynamic> json) => PublishDay(
+AnimeDtoPublishDay _$AnimeDtoPublishDayFromJson(Map<String, dynamic> json) =>
+    AnimeDtoPublishDay(
       value: (json['value'] as num).toInt(),
       description: json['description'] as String,
     );
 
-Map<String, dynamic> _$PublishDayToJson(PublishDay instance) =>
+Map<String, dynamic> _$AnimeDtoPublishDayToJson(AnimeDtoPublishDay instance) =>
     <String, dynamic>{
       'value': instance.value,
       'description': instance.description,

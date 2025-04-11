@@ -3,14 +3,31 @@ import 'package:json_annotation/json_annotation.dart';
 part 'anime.g.dart';
 
 @JsonSerializable()
+class AnimeDtoData {
+  final List<AnimeDto> data;
+
+  AnimeDtoData({required this.data});
+
+  factory AnimeDtoData.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnimeDtoDataToJson(this);
+
+  @override
+  String toString() {
+    return '$data';
+  }
+}
+
+@JsonSerializable()
 class AnimeDto {
   final int id;
-  final AnimeType type;
+  final AnimeDtoType type;
   final int year;
-  final AnimeName name;
+  final AnimeDtoName name;
   final String alias;
-  final AnimeSeason season;
-  final AnimePoster poster;
+  final AnimeDtoSeason season;
+  final AnimeDtoPoster poster;
   @JsonKey(name: 'fresh_at')
   final String? freshAt;
   @JsonKey(name: 'created_at')
@@ -20,13 +37,13 @@ class AnimeDto {
   @JsonKey(name: 'is_ongoing')
   final bool isOngoing;
   @JsonKey(name: 'age_rating')
-  final AgeRating ageRating;
+  final AnimeDtoAgeRating ageRating;
   @JsonKey(name: 'publish_day')
-  final PublishDay publishDay;
-  final String description;
+  final AnimeDtoPublishDay publishDay;
+  final String? description;
   final String? notification;
   @JsonKey(name: 'episodes_total')
-  final int episodesTotal;
+  final int? episodesTotal;
   @JsonKey(name: 'external_player')
   final String? externalPlayer;
   @JsonKey(name: 'is_in_production')
@@ -38,7 +55,7 @@ class AnimeDto {
   @JsonKey(name: 'added_in_users_favorites')
   final int addedInUsersFavorites;
   @JsonKey(name: 'average_duration_of_episode')
-  final int averageDurationOfEpisode;
+  final int? averageDurationOfEpisode;
 
   AnimeDto({
     required this.id,
@@ -69,122 +86,162 @@ class AnimeDto {
       _$AnimeDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$AnimeDtoToJson(this);
+
+  @override
+  String toString() {
+    return '$year, $name';
+  }
 }
 
 @JsonSerializable()
-class AnimeType {
-  final String value;
-  final String description;
+class AnimeDtoType {
+  final String? value;
+  final String? description;
 
-  AnimeType({required this.value, required this.description});
+  AnimeDtoType({required this.value, required this.description});
 
-  factory AnimeType.fromJson(Map<String, dynamic> json) =>
-      _$AnimeTypeFromJson(json);
+  factory AnimeDtoType.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoTypeFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AnimeTypeToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoTypeToJson(this);
+
+  @override
+  String toString() {
+    return '$description';
+  }
 }
 
 @JsonSerializable()
-class AnimeName {
+class AnimeDtoName {
   final String main;
   final String english;
-  final String alternative;
+  final String? alternative;
 
-  AnimeName({
+  AnimeDtoName({
     required this.main,
     required this.english,
     required this.alternative,
   });
 
-  factory AnimeName.fromJson(Map<String, dynamic> json) =>
-      _$AnimeNameFromJson(json);
+  factory AnimeDtoName.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoNameFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AnimeNameToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoNameToJson(this);
+
+  @override
+  String toString() {
+    return '$main, $english, $alternative';
+  }
 }
 
 @JsonSerializable()
-class AnimeSeason {
+class AnimeDtoSeason {
   final String value;
   final String description;
 
-  AnimeSeason({
+  AnimeDtoSeason({
     required this.value,
     required this.description,
   });
 
-  factory AnimeSeason.fromJson(Map<String, dynamic> json) =>
-      _$AnimeSeasonFromJson(json);
+  factory AnimeDtoSeason.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoSeasonFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AnimeSeasonToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoSeasonToJson(this);
+
+  @override
+  String toString() {
+    return value;
+  }
 }
 
 @JsonSerializable()
-class AnimePoster {
+class AnimeDtoPoster {
   final String src;
   final String thumbnail;
-  final OptimizedPoster optimized;
+  final AnimeDtoOptimizedPoster optimized;
 
-  AnimePoster({
+  AnimeDtoPoster({
     required this.src,
     required this.thumbnail,
     required this.optimized,
   });
 
-  factory AnimePoster.fromJson(Map<String, dynamic> json) =>
-      _$AnimePosterFromJson(json);
+  factory AnimeDtoPoster.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoPosterFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AnimePosterToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoPosterToJson(this);
+
+  @override
+  String toString() {
+    return src;
+  }
 }
 
 @JsonSerializable()
-class OptimizedPoster {
+class AnimeDtoOptimizedPoster {
   final String src;
   final String thumbnail;
 
-  OptimizedPoster({
+  AnimeDtoOptimizedPoster({
     required this.src,
     required this.thumbnail,
   });
 
-  factory OptimizedPoster.fromJson(Map<String, dynamic> json) =>
-      _$OptimizedPosterFromJson(json);
+  factory AnimeDtoOptimizedPoster.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoOptimizedPosterFromJson(json);
 
-  Map<String, dynamic> toJson() => _$OptimizedPosterToJson(this);
+ Map<String, dynamic> toJson() => _$AnimeDtoOptimizedPosterToJson(this);
+
+ @override
+  String toString() {
+    return src;
+  }
 }
 
 @JsonSerializable()
-class AgeRating {
+class AnimeDtoAgeRating {
   final String value;
   final String label;
   @JsonKey(name: 'is_adult')
   final bool isAdult;
   final String description;
 
-  AgeRating({
+  AnimeDtoAgeRating({
     required this.value,
     required this.label,
     required this.isAdult,
     required this.description,
   });
 
-  factory AgeRating.fromJson(Map<String, dynamic> json) =>
-      _$AgeRatingFromJson(json);
+  factory AnimeDtoAgeRating.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoAgeRatingFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AgeRatingToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoAgeRatingToJson(this);
+
+  @override
+  String toString() {
+    return description;
+  }
 }
 
 @JsonSerializable()
-class PublishDay {
+class AnimeDtoPublishDay {
   final int value;
   final String description;
 
-  PublishDay({
+  AnimeDtoPublishDay({
     required this.value,
     required this.description,
   });
 
-  factory PublishDay.fromJson(Map<String, dynamic> json) =>
-      _$PublishDayFromJson(json);
+  factory AnimeDtoPublishDay.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoPublishDayFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PublishDayToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoPublishDayToJson(this);
+
+  @override
+  String toString() {
+    return description;
+  }
 }
