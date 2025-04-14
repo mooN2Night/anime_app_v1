@@ -9,5 +9,8 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String? baseUrl}) = _RestClient;
 
   @GET('/anime/releases/random')
-  Future<AnimeDto> getRandomAnime();
+  Future<List<AnimeDto>> getRandomAnime();
+
+  @GET('/anime/catalog/releases')
+  Future<AnimeDtoData> getNewEpisodes(@Query('limit') int limit);
 }
