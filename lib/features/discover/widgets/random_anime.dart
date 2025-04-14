@@ -25,23 +25,8 @@ class RandomAnime extends StatelessWidget {
                   Colors.transparent,
                   Colors.transparent,
                   Colors.black.withValues(alpha: 0.5),
-                  Colors.black.withValues(alpha: 0.9),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.black.withValues(alpha: 0.5),
-                  Colors.black.withValues(alpha: 0.9),
+                  Colors.black.withValues(alpha: 0.8),
+                  Colors.black,
                 ],
               ),
             ),

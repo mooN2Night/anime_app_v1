@@ -9,6 +9,8 @@ part 'new_episodes_event.dart';
 
 part 'new_episodes_state.dart';
 
+const animeCount = 20;
+
 class NewEpisodesBloc extends Bloc<NewEpisodesEvent, NewEpisodesState> {
   NewEpisodesBloc({required DiscoverRepositoryI discoverRepository})
       : _discoverRepository = discoverRepository,
@@ -24,9 +26,10 @@ class NewEpisodesBloc extends Bloc<NewEpisodesEvent, NewEpisodesState> {
   ) async {
     try {
       emit(NewEpisodesLoading());
-      final animeDtoData = await _discoverRepository.fetchNewEpisodes();
+      final animeDtoData =
+          await _discoverRepository.fetchNewEpisodes(animeCount);
       final animeDtoList = animeDtoData.data;
-      final animeList = animeDtoList.map(AnimeMapper.fromDto).toList();
+      final animeList = animeDtoList.map(AnimeMapper.fromAnimeDto).toList();
       emit(NewEpisodesLoaded(animeList: animeList));
     } catch (e) {
       emit(NewEpisodesFailure(e.toString()));

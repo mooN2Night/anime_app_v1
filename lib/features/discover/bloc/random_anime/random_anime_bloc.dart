@@ -30,7 +30,7 @@ class RandomAnimeBloc extends Bloc<RandomAnimeEvent, RandomAnimeState> {
         return;
       }
 
-      final anime = AnimeMapper.fromDto(animeDtoList.first);
+      final anime = AnimeMapper.fromAnimeDto(animeDtoList.first);
       emit(RandomAnimeLoaded(anime: anime));
     } catch (e) {
       emit(RandomAnimeFailure(e.toString()));

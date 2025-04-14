@@ -22,6 +22,18 @@ final lightTheme = ThemeData(
       color: Colors.black.withValues(alpha: 0.7),
       fontWeight: FontWeight.w400,
     ),
+    titleMedium: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
+    labelLarge: TextStyle(
+      color: Colors.white70,
+      fontSize: 16,
+    ),
+    labelSmall: TextStyle(
+      color: Colors.white54,
+      fontSize: 12,
+    ),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     selectedItemColor: Colors.black,

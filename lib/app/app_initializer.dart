@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_anime_app/features/discover/bloc/new_episodes/new_episodes_bloc.dart';
+import 'package:new_anime_app/features/discover/bloc/schedule_now/schedule_now_bloc.dart';
 
 import '../api/api.dart';
 import '../features/discover/bloc/random_anime/random_anime_bloc.dart';
@@ -29,6 +30,11 @@ class AppInitializer extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => NewEpisodesBloc(
+              discoverRepository: context.read<DiscoverRepositoryI>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => ScheduleNowBloc(
               discoverRepository: context.read<DiscoverRepositoryI>(),
             ),
           ),

@@ -1,5 +1,6 @@
 part of 'random_anime_bloc.dart';
 
+@immutable
 sealed class RandomAnimeEvent extends Equatable {
   const RandomAnimeEvent();
 

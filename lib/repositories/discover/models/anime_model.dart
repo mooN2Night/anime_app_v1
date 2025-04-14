@@ -52,6 +52,11 @@ class Anime {
     required this.addedInUsersFavorites,
     required this.averageDurationOfEpisode,
   });
+
+  @override
+  String toString() {
+    return 'name: $name';
+  }
 }
 
 class AnimeInfo {
@@ -71,6 +76,11 @@ class AnimeName {
     required this.english,
     required this.alternative,
   });
+
+  @override
+  String toString() {
+    return 'main: $main';
+  }
 }
 
 class Poster {
