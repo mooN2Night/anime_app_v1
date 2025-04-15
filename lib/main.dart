@@ -9,7 +9,9 @@ Future<void> main() async {
 
   final apiClient = RestClient(dio);
 
-  runApp(AnimeApp(
-    client: apiClient,
-  ));
+  runApp(
+    AnimeApp(
+      client: apiClient,
+    ),
+  );
 }

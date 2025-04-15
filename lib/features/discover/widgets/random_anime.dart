@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:new_anime_app/router/router.gr.dart';
 
 import '../../../repositories/discover/discover.dart';
 
@@ -9,71 +11,59 @@ class RandomAnime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.network(
-          anime.poster.fullSrc,
-          fit: BoxFit.fill,
-        ),
-        Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.black.withValues(alpha: 0.5),
-                  Colors.black.withValues(alpha: 0.9),
-                ],
+    return GestureDetector(
+      onTap: () => context.pushRoute(DetailAnimeRoute(anime: anime)),
+      child: Stack(
+        children: [
+          Image.network(
+            anime.poster.optimized.fullSrc,
+            fit: BoxFit.fill,
+          ),
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.5),
+                    Colors.black.withValues(alpha: 0.8),
+                    Colors.black,
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.black.withValues(alpha: 0.5),
-                  Colors.black.withValues(alpha: 0.9),
-                ],
-              ),
+          Positioned(
+            bottom: 16,
+            left: 16,
+            right: 16,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  anime.name.main,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 35,
+                  ),
+                ),
+                Text(
+                  anime.description,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-        Positioned(
-          bottom: 16,
-          left: 16,
-          right: 16,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                anime.name.main,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 35,
-                ),
-              ),
-              Text(
-                anime.description,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

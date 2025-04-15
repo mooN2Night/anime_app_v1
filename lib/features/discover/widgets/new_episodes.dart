@@ -45,8 +45,9 @@ class NewEpisodes extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       image: DecorationImage(
-                          image: NetworkImage(anime.poster.fullSrc),
-                          fit: BoxFit.fill),
+                        image: NetworkImage(anime.poster.optimized.fullSrc),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 15),

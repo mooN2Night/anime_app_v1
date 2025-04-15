@@ -7,6 +7,7 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: HomeRoute.page,
+          initial: true,
           path: '/',
           children: [
             AutoRoute(
@@ -26,6 +27,10 @@ class AppRouter extends RootStackRouter {
               path: 'profile',
             ),
           ],
+        ),
+        AutoRoute(
+          page: DetailAnimeRoute.page,
+          path: '/anime/:anime',
         ),
       ];
 }
