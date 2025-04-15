@@ -51,6 +51,35 @@ class AnimeMapper {
       isBlockedByCopyrights: dto.isBlockedByCopyrights,
       addedInUsersFavorites: dto.addedInUsersFavorites,
       averageDurationOfEpisode: dto.averageDurationOfEpisode,
+      genres: dto.genres?.map((genre) => fromAnimeGenresDto(genre)).toList(),
+    );
+  }
+
+  static AnimeGenres fromAnimeGenresDto(AnimeDtoGenres dto) {
+    return AnimeGenres(
+      id: dto.id,
+      name: dto.name,
+      image: fromAnimeGenresImageDto(dto.image),
+      totalReleases: dto.totalReleases,
+    );
+  }
+
+  static AnimeGenresImage fromAnimeGenresImageDto(
+    AnimeDtoGenresImage dto,
+  ) {
+    return AnimeGenresImage(
+      preview: dto.preview,
+      thumbnail: dto.thumbnail,
+      optimized: fromAnimeGenresOptimizedImageDto(dto.optimized),
+    );
+  }
+
+  static AnimeGenresOptimizedImage fromAnimeGenresOptimizedImageDto(
+    AnimeDtoGenresOptimizedImage dto,
+  ) {
+    return AnimeGenresOptimizedImage(
+      preview: dto.preview,
+      thumbnail: dto.thumbnail,
     );
   }
 

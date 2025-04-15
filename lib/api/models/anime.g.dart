@@ -43,6 +43,9 @@ AnimeDto _$AnimeDtoFromJson(Map<String, dynamic> json) => AnimeDto(
       addedInUsersFavorites: (json['added_in_users_favorites'] as num).toInt(),
       averageDurationOfEpisode:
           (json['average_duration_of_episode'] as num?)?.toInt(),
+      genres: (json['genres'] as List<dynamic>?)
+          ?.map((e) => AnimeDtoGenres.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$AnimeDtoToJson(AnimeDto instance) => <String, dynamic>{
@@ -68,6 +71,7 @@ Map<String, dynamic> _$AnimeDtoToJson(AnimeDto instance) => <String, dynamic>{
       'is_blocked_by_copyrights': instance.isBlockedByCopyrights,
       'added_in_users_favorites': instance.addedInUsersFavorites,
       'average_duration_of_episode': instance.averageDurationOfEpisode,
+      'genres': instance.genres,
     };
 
 AnimeDtoType _$AnimeDtoTypeFromJson(Map<String, dynamic> json) => AnimeDtoType(
@@ -161,4 +165,51 @@ Map<String, dynamic> _$AnimeDtoPublishDayToJson(AnimeDtoPublishDay instance) =>
     <String, dynamic>{
       'value': instance.value,
       'description': instance.description,
+    };
+
+AnimeDtoGenres _$AnimeDtoGenresFromJson(Map<String, dynamic> json) =>
+    AnimeDtoGenres(
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
+      image:
+          AnimeDtoGenresImage.fromJson(json['image'] as Map<String, dynamic>),
+      totalReleases: (json['total_releases'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$AnimeDtoGenresToJson(AnimeDtoGenres instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'image': instance.image,
+      'total_releases': instance.totalReleases,
+    };
+
+AnimeDtoGenresImage _$AnimeDtoGenresImageFromJson(Map<String, dynamic> json) =>
+    AnimeDtoGenresImage(
+      preview: json['preview'] as String,
+      thumbnail: json['thumbnail'] as String,
+      optimized: AnimeDtoGenresOptimizedImage.fromJson(
+          json['optimized'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AnimeDtoGenresImageToJson(
+        AnimeDtoGenresImage instance) =>
+    <String, dynamic>{
+      'preview': instance.preview,
+      'thumbnail': instance.thumbnail,
+      'optimized': instance.optimized,
+    };
+
+AnimeDtoGenresOptimizedImage _$AnimeDtoGenresOptimizedImageFromJson(
+        Map<String, dynamic> json) =>
+    AnimeDtoGenresOptimizedImage(
+      preview: json['preview'] as String,
+      thumbnail: json['thumbnail'] as String,
+    );
+
+Map<String, dynamic> _$AnimeDtoGenresOptimizedImageToJson(
+        AnimeDtoGenresOptimizedImage instance) =>
+    <String, dynamic>{
+      'preview': instance.preview,
+      'thumbnail': instance.thumbnail,
     };

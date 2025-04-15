@@ -27,6 +27,7 @@ class Anime {
   final bool isBlockedByCopyrights;
   final int addedInUsersFavorites;
   final int? averageDurationOfEpisode;
+  final List<AnimeGenres>? genres;
 
   Anime({
     required this.id,
@@ -51,6 +52,7 @@ class Anime {
     required this.isBlockedByCopyrights,
     required this.addedInUsersFavorites,
     required this.averageDurationOfEpisode,
+    required this.genres,
   });
 
   @override
@@ -117,5 +119,41 @@ class AgeRating {
     required this.label,
     required this.isAdult,
     required this.description,
+  });
+}
+
+class AnimeGenres {
+  final int id;
+  final String name;
+  final AnimeGenresImage image;
+  final int totalReleases;
+
+  AnimeGenres({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.totalReleases,
+  });
+}
+
+class AnimeGenresImage {
+  final String preview;
+  final String thumbnail;
+  final AnimeGenresOptimizedImage optimized;
+
+  AnimeGenresImage({
+    required this.preview,
+    required this.thumbnail,
+    required this.optimized,
+  });
+}
+
+class AnimeGenresOptimizedImage {
+  final String preview;
+  final String thumbnail;
+
+  AnimeGenresOptimizedImage({
+    required this.preview,
+    required this.thumbnail,
   });
 }

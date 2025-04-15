@@ -29,6 +29,9 @@ class DiscoverRepository implements DiscoverRepositoryI {
       BaseOptions(
         baseUrl: 'https://anilibria.top/api/v1',
         responseType: ResponseType.bytes,
+        headers: {
+          'Accept-Encoding': 'br',
+        },
       ),
     );
 
@@ -44,8 +47,7 @@ class DiscoverRepository implements DiscoverRepositoryI {
 
       final jsonData = jsonDecode(decompressed);
 
-      final a = ScheduleNowDto.fromJson(jsonData);
-      return a;
+      return ScheduleNowDto.fromJson(jsonData);
     } on DioException catch (e) {
       if (e.response != null) {
         throw Exception('Ошибка запроса: ${e.response?.data}');

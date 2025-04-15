@@ -56,6 +56,7 @@ class AnimeDto {
   final int addedInUsersFavorites;
   @JsonKey(name: 'average_duration_of_episode')
   final int? averageDurationOfEpisode;
+  final List<AnimeDtoGenres>? genres;
 
   AnimeDto({
     required this.id,
@@ -80,6 +81,7 @@ class AnimeDto {
     required this.isBlockedByCopyrights,
     required this.addedInUsersFavorites,
     required this.averageDurationOfEpisode,
+    this.genres,
   });
 
   factory AnimeDto.fromJson(Map<String, dynamic> json) =>
@@ -191,9 +193,9 @@ class AnimeDtoOptimizedPoster {
   factory AnimeDtoOptimizedPoster.fromJson(Map<String, dynamic> json) =>
       _$AnimeDtoOptimizedPosterFromJson(json);
 
- Map<String, dynamic> toJson() => _$AnimeDtoOptimizedPosterToJson(this);
+  Map<String, dynamic> toJson() => _$AnimeDtoOptimizedPosterToJson(this);
 
- @override
+  @override
   String toString() {
     return src;
   }
@@ -243,5 +245,76 @@ class AnimeDtoPublishDay {
   @override
   String toString() {
     return description;
+  }
+}
+
+@JsonSerializable()
+class AnimeDtoGenres {
+  final int id;
+  final String name;
+  final AnimeDtoGenresImage image;
+  @JsonKey(name: 'total_releases')
+  final int totalReleases;
+
+  AnimeDtoGenres({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.totalReleases,
+  });
+
+  factory AnimeDtoGenres.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoGenresFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnimeDtoGenresToJson(this);
+
+  @override
+  String toString() {
+    return name;
+  }
+}
+
+@JsonSerializable()
+class AnimeDtoGenresImage {
+  final String preview;
+  final String thumbnail;
+  final AnimeDtoGenresOptimizedImage optimized;
+
+  AnimeDtoGenresImage({
+    required this.preview,
+    required this.thumbnail,
+    required this.optimized,
+  });
+
+  factory AnimeDtoGenresImage.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoGenresImageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnimeDtoGenresImageToJson(this);
+
+  @override
+  String toString() {
+    return '$preview, $optimized';
+  }
+}
+
+@JsonSerializable()
+class AnimeDtoGenresOptimizedImage {
+  final String preview;
+  final String thumbnail;
+
+  AnimeDtoGenresOptimizedImage({
+    required this.preview,
+    required this.thumbnail,
+  });
+
+
+  factory AnimeDtoGenresOptimizedImage.fromJson(Map<String, dynamic> json) =>
+      _$AnimeDtoGenresOptimizedImageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnimeDtoGenresOptimizedImageToJson(this);
+
+  @override
+  String toString() {
+    return preview;
   }
 }

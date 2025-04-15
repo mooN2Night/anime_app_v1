@@ -66,111 +66,144 @@ class _ReleaseScheduleState extends State<ReleaseSchedule> {
         const SizedBox(height: 10),
         SizedBox(
           height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: _getCurrentList().length,
-            itemBuilder: (context, index) {
-              final currentDay = _getCurrentList()[index];
-              final anime = currentDay.anime;
-              return Container(
-                margin: EdgeInsets.only(
-                  right: index == _getCurrentList().length - 1 ? 0 : 8,
-                ),
-                width: 300,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.network(
-                          currentDay.anime.poster.fullSrc,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.black.withValues(alpha: 0.8),
-                              Colors.black.withValues(alpha: 0.8),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 20,
-                      left: 20,
-                      child: Text(
-                        anime.name.main,
-                        style: theme.textTheme.titleMedium,
-                      ),
-                    ),
-                    currentDay.isSeasonReleased == false
-                        ? Positioned(
-                            top: 55,
-                            left: 20,
-                            child: Text(
-                              'Эпизод ${currentDay.nextReleaseEpisodeNumber}',
-                              style: theme.textTheme.labelLarge,
-                            ),
-                          )
-                        : Positioned(
-                            top: 55,
-                            left: 20,
-                            child: Container(
-                              padding: const EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF616161),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Text(
-                                'Полный сезон',
-                                style: theme.textTheme.labelLarge,
-                              ),
-                            ),
-                          ),
-                    Positioned(
-                      top: 100,
-                      left: 20,
-                      child: Row(
-                        children: [
-                          Text(
-                            anime.year.toString(),
-                            style: theme.textTheme.labelSmall,
-                          ),
-                          _dotIcon(),
-                          Text(
-                            anime.season.description.toString(),
-                            style: theme.textTheme.labelSmall,
-                          ),
-                          _dotIcon(),
-                          Text(
-                            anime.type.description,
-                            style: theme.textTheme.labelSmall,
-                          ),
-                          _dotIcon(),
-                          Text(
-                            anime.ageRating.label,
-                            style: theme.textTheme.labelSmall,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+          child: Builder(builder: (context) {
+            switch (_selectedDay) {
+              case ScheduleDay.yesterday:
+                return _scheduleList(theme, ScheduleDay.yesterday);
+              case ScheduleDay.today:
+                return _scheduleList(theme, ScheduleDay.today);
+              case ScheduleDay.tomorrow:
+                return _scheduleList(theme, ScheduleDay.tomorrow);
+            }
+          }),
         ),
         const SizedBox(height: 16),
       ],
+    );
+  }
+
+  ListView _scheduleList(ThemeData theme, ScheduleDay day) {
+    final animeList = _getCurrentList();
+    return ListView.builder(
+      key: PageStorageKey(day),
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      itemCount: animeList.length,
+      itemBuilder: (context, index) {
+        final currentDay = animeList[index];
+        final anime = currentDay.anime;
+        final genresName = anime.genres?.map((genre) => genre.name).join(', ');
+
+        return Container(
+          margin: EdgeInsets.only(
+            right: index == animeList.length - 1 ? 0 : 8,
+          ),
+          width: 300,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    currentDay.anime.poster.optimized.fullSrc,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: 0.8),
+                        Colors.black.withValues(alpha: 0.8),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 20,
+                left: 20,
+                child: Text(
+                  anime.name.main,
+                  style: theme.textTheme.titleMedium,
+                ),
+              ),
+              currentDay.isSeasonReleased == false
+                  ? Positioned(
+                      top: 55,
+                      left: 20,
+                      child: Text(
+                        'Эпизод ${currentDay.nextReleaseEpisodeNumber}',
+                        style: theme.textTheme.labelLarge,
+                      ),
+                    )
+                  : Positioned(
+                      top: 55,
+                      left: 20,
+                      child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF616161),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          'Полный сезон',
+                          style: theme.textTheme.labelLarge,
+                        ),
+                      ),
+                    ),
+              Positioned(
+                top: 100,
+                left: 20,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 260),
+                  child: Row(
+                    children: [
+                      Text(
+                        anime.year.toString(),
+                        style: theme.textTheme.labelSmall,
+                      ),
+                      _dotIcon(),
+                      Text(
+                        anime.season.description.toString(),
+                        style: theme.textTheme.labelSmall,
+                      ),
+                      _dotIcon(),
+                      Text(
+                        anime.type.description,
+                        style: theme.textTheme.labelSmall,
+                      ),
+                      _dotIcon(),
+                      Text(
+                        anime.ageRating.label,
+                        style: theme.textTheme.labelSmall,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 120,
+                left: 20,
+                right: 20,
+                child: Expanded(
+                  child: Text(
+                    genresName ?? '',
+                    style: theme.textTheme.labelSmall,
+                    softWrap: true,
+                    overflow: TextOverflow.visible,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
