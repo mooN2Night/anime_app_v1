@@ -11,8 +11,9 @@ class RandomAnime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () => context.pushRoute(DetailAnimeRoute(anime: anime)),
+      onTap: () => context.pushRoute(DetailAnimeRoute(alias: anime.alias)),
       child: Stack(
         children: [
           Image.network(
@@ -45,19 +46,13 @@ class RandomAnime extends StatelessWidget {
               children: [
                 Text(
                   anime.name.main,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 35,
-                  ),
+                  style: theme.textTheme.headlineLarge,
                 ),
                 Text(
                   anime.description,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
+                  style: theme.textTheme.labelLarge,
                 ),
               ],
             ),

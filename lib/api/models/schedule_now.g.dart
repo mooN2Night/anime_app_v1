@@ -68,7 +68,7 @@ Map<String, dynamic> _$ReleaseEpisodeDtoToJson(ReleaseEpisodeDto instance) =>
     };
 
 PreviewDto _$PreviewDtoFromJson(Map<String, dynamic> json) => PreviewDto(
-      src: json['src'] as String,
+      src: json['src'] as String?,
     );
 
 Map<String, dynamic> _$PreviewDtoToJson(PreviewDto instance) =>

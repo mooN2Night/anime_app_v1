@@ -18,19 +18,31 @@ final lightTheme = ThemeData(
   primaryColor: _primaryColor,
   scaffoldBackgroundColor: const Color(0xFFEFF1F3),
   textTheme: TextTheme(
+    headlineLarge: const TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    ),
+    titleLarge: const TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+    ),
+    titleMedium: const TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
+    titleSmall: const TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+    ),
+    labelLarge: const TextStyle(
+      color: Colors.white70,
+      fontSize: 16,
+    ),
     labelMedium: TextStyle(
       color: Colors.black.withValues(alpha: 0.7),
       fontWeight: FontWeight.w400,
     ),
-    titleMedium: TextStyle(
-      color: Colors.white,
-      fontSize: 20,
-    ),
-    labelLarge: TextStyle(
-      color: Colors.white70,
-      fontSize: 16,
-    ),
-    labelSmall: TextStyle(
+    labelSmall: const TextStyle(
       color: Colors.white54,
       fontSize: 12,
     ),

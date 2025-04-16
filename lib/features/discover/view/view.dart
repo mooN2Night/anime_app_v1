@@ -1,1 +1,1 @@
-export 'discover_screen.dart';
+export 'discover_page.dart';

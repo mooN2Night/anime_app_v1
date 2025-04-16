@@ -8,8 +8,8 @@ import '../widgets/widgets.dart';
 const horizontalPadding = 16.0;
 
 @RoutePage()
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HistoryScreen extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: BaseContainer(
+              child: AnimeContainer(
                 info: 'Просмотрено 6/12 серий',
                 openAnime: () => Navigator.of(context).push(
                   MaterialPageRoute(
