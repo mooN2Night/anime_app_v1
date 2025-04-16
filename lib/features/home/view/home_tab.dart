@@ -4,8 +4,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:new_anime_app/router/router.gr.dart';
 
 @RoutePage()
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeTab extends StatelessWidget {
+  const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {

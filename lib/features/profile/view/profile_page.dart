@@ -5,8 +5,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import '../widgets/widgets.dart';
 
 @RoutePage()
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {

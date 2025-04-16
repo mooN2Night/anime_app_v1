@@ -12,8 +12,8 @@ const emptyFavoriteText =
 const emptyFavoriteImage = 'assets/images/kaonasi.png';
 
 @RoutePage()
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({super.key});
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({super.key});
 
   @override
   Widget build(BuildContext context) {

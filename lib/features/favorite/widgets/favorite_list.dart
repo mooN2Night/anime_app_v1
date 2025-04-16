@@ -14,7 +14,7 @@ class FavoriteList extends StatelessWidget {
       child: ListView.builder(
         itemCount: 50,
         itemBuilder: (context, index) {
-          return const BaseContainer(
+          return const AnimeContainer(
             description: description,
             info: 'Тут будут поля\nЕщё поля\nИ ещё поля',
           );

@@ -8,8 +8,8 @@ const animeName =
 
 const horizontalPadding = 16.0;
 
-class BaseContainer extends StatelessWidget {
-  const BaseContainer({
+class AnimeContainer extends StatelessWidget {
+  const AnimeContainer({
     super.key,
     this.description,
     this.info,

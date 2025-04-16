@@ -25,7 +25,7 @@ class ScheduleNowBloc extends Bloc<ScheduleNowEvent, ScheduleNowState> {
     try {
       emit(ScheduleNowLoading());
       final scheduleDto = await _discoverRepository.fetchNowSchedule();
-      final schedule = AnimeMapper.fromScheduleNowDto(scheduleDto);
+      final schedule = ScheduleMapper.fromScheduleNowDto(scheduleDto);
       emit(
         ScheduleNowLoaded(
           today: schedule.today,

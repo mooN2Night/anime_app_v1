@@ -25,12 +25,13 @@ class RandomAnimeBloc extends Bloc<RandomAnimeEvent, RandomAnimeState> {
     emit(RandomAnimeLoading());
     try {
       final animeDtoList = await _discoverRepository.fetchRandomAnime();
-      if (animeDtoList == null || animeDtoList.isEmpty) {
+      if (animeDtoList.isEmpty) {
         emit(const RandomAnimeFailure('Не удалось получить аниме.'));
         return;
       }
 
-      final anime = AnimeMapper.fromAnimeDto(animeDtoList.first);
+      final anime = AnimeMapper.fromAnimeDto(animeDtoList[0]);
+
       emit(RandomAnimeLoaded(anime: anime));
     } catch (e) {
       emit(RandomAnimeFailure(e.toString()));

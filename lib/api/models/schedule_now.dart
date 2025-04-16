@@ -86,7 +86,7 @@ class ReleaseEpisodeDto {
 
 @JsonSerializable()
 class PreviewDto {
-  final String src;
+  final String? src;
 
   PreviewDto({required this.src});
 

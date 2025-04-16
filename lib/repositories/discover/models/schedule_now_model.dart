@@ -48,7 +48,7 @@ class ReleaseEpisode {
 }
 
 class Preview {
-  final String src;
+  final String? src;
 
   String get fullSrc => 'https://anilibria.top$src';
 

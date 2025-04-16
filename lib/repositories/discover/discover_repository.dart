@@ -58,4 +58,76 @@ class DiscoverRepository implements DiscoverRepositoryI {
       throw Exception('Другая ошибка: $e');
     }
   }
+
+  @override
+  Future<List<GenresDto>> fetchGenres() async {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: 'https://anilibria.top/api/v1',
+        responseType: ResponseType.bytes,
+        headers: {
+          'Accept-Encoding': 'br',
+        },
+      ),
+    );
+
+    try {
+      final response = await dio.get('/anime/genres');
+
+      if (response.statusCode != 200) {
+        throw Exception('Сервер вернул ошибку: ${response.data}');
+      }
+      final data = response.data;
+
+      final decompressed = brotli.decodeToString(data);
+
+      final jsonData = jsonDecode(decompressed) as List;
+
+      return jsonData.map((genre) => GenresDto.fromJson(genre)).toList();
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception('Ошибка запроса: ${e.response?.data}');
+      } else {
+        throw Exception('Ошибка без ответа от сервера: ${e.response?.data}');
+      }
+    } catch (e) {
+      throw Exception('Другая ошибка: $e');
+    }
+  }
+
+  @override
+  Future<AnimeDto> fetchDetailAnime(String alias) async {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: 'https://anilibria.top/api/v1',
+        responseType: ResponseType.bytes,
+        headers: {
+          'Accept-Encoding': 'br',
+        },
+      ),
+    );
+
+    try {
+      final response = await dio.get('/anime/releases/$alias');
+
+      if (response.statusCode != 200) {
+        throw Exception('Сервер вернул ошибку: ${response.data}');
+      }
+      final data = response.data;
+
+      final decompressed = brotli.decodeToString(data);
+
+      final jsonData = jsonDecode(decompressed);
+
+      return AnimeDto.fromJson(jsonData);
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception('Ошибка запроса: ${e.response?.data}');
+      } else {
+        throw Exception('Ошибка без ответа от сервера: ${e.response?.data}');
+      }
+    } catch (e) {
+      throw Exception('Другая ошибка: $e');
+    }
+  }
 }
